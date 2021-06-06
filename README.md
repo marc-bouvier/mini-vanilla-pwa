@@ -7,7 +7,7 @@ POC of the most simple PWA (Progressive Web App) I can do.
 - [X] Find out what devices we want to target (https://caniuse.com/)
     - Most recent
 - [X] Add subdomain `pwa.baldir.fr`
-- [ ] Create virtual host in my VPS (as a reverse proxy)
+- [X] Create virtual host in my VPS (as a reverse proxy)
 - [ ] Create letsEncrypt certificate for the subdomain `pwa.baldir.fr`
 - [ ] Create and deploy to prove it can be installed on a device
 - [ ] Document how to do it -> Making-of
@@ -51,7 +51,7 @@ Then we need to redirect the (sub-)domain to the correct application in the runn
 - Connect to your server through SSH
 - Add a virtualhost to your nginx config
 
-Here is a sample of the configuration I use.
+Here is a sample of the Nginx configuration I use.
 
 ```
 server {
@@ -75,8 +75,16 @@ server {
         root   /usr/share/nginx/html;
     }
 
-}```
+}
+```
+### Add LetEncrypt SSL certificate with certbot
 
+- Add a CAA record for Linode
+    - Name : pwa
+    - Tag : issue
+    - Value : letsencrypt.org
+    
+TODO : fix later
 
 ### `manifest.json`
 
