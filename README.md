@@ -12,10 +12,12 @@ POC of the most simple PWA (Progressive Web App) I can do.
 - [X] add icons
 - [X] Check PWA with LightHouse
 - [X] Create and deploy to prove it can be installed on a device
-- [ ] Document how to do it -> Making-of
-- [ ] 404 error page `404.html`
+- [X] Document how to do it -> Making-of
+- [X] Make this repo a template
 
 ## Installation
+
+Open the application on your mobile phone and it should be installable : https://marc-bouvier.github.io/mini-vanilla-pwa 
 
 ## Hosting
 
