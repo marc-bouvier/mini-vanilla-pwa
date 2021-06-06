@@ -93,6 +93,31 @@ TODO : fix later
 - create an icon for apple ``
 - add support for older devices : `<link rel='icon' sizes='192x192' href='icon-192x192.png'>`
 
+
+Ex. 
+
+```json
+{
+  "lang": "en",
+  "dir": "ltr",
+  "name": "Mini vanilla PWA POC",
+  "short_name": "mini-vanilla-pwa",
+  "scope": "./",
+  "icons": [{
+    "src": "imgs/icon_144x144.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  },
+    {
+      "src": "imgs/icon_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }],
+  "display": "standalone",
+  "start_url": "./"
+}
+```
+
 ### 
 
 
