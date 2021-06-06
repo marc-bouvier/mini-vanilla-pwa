@@ -229,25 +229,23 @@ index.html
 app.js
 
 ```js
-// Register service worker
-if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
-};
+// Registering Service Worker
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/mini-vanilla-pwa/sw.js');
+}
 ```
 
 sw.js
 
 ```js
-
 var cacheName = 'mini-vanilla-pwa-v1';
 var appShellFiles = [
-    '/',
-    '/index.html',
-    '/app.js',
-    '/style.css',
-    // '/favicon.ico',
-    '/icons/icon_144x144.png',
-    '/icons/icon_192x192.png',
+    '/mini-vanilla-pwa/',
+    '/mini-vanilla-pwa/index.html',
+    '/mini-vanilla-pwa/app.js',
+    '/mini-vanilla-pwa/style.css',
+    '/mini-vanilla-pwa/icons/icon_144x144.png',
+    '/mini-vanilla-pwa/icons/icon_192x192.png',
 ];
 var contentToCache =appShellFiles;
 
@@ -256,10 +254,10 @@ var contentToCache =appShellFiles;
 self.addEventListener('install', function(e) {
     console.log('[Service Worker] Install');
     e.waitUntil(
-        caches.open(cacheName).then(function(cache) {
-            console.log('[Service Worker] Caching all: app shell and content');
-            return cache.addAll(contentToCache);
-        })
+            caches.open(cacheName).then(function(cache) {
+                console.log('[Service Worker] Caching all: app shell and content');
+                return cache.addAll(contentToCache);
+            })
     );
 });
 
@@ -267,18 +265,19 @@ self.addEventListener('install', function(e) {
 
 self.addEventListener('fetch', function(e) {
     e.respondWith(
-        caches.match(e.request).then(function(r) {
-            console.log('[Service Worker] Fetching resource: '+e.request.url);
-            return r || fetch(e.request).then(function(response) {
-                return caches.open(cacheName).then(function(cache) {
-                    console.log('[Service Worker] Caching new resource: '+e.request.url);
-                    cache.put(e.request, response.clone());
-                    return response;
+            caches.match(e.request).then(function(r) {
+                console.log('[Service Worker] Fetching resource: '+e.request.url);
+                return r || fetch(e.request).then(function(response) {
+                    return caches.open(cacheName).then(function(cache) {
+                        console.log('[Service Worker] Caching new resource: '+e.request.url);
+                        cache.put(e.request, response.clone());
+                        return response;
+                    });
                 });
-            });
-        })
+            })
     );
 });
+
 ```
 ### Add the application to your mobile phone
 
