@@ -54,14 +54,13 @@ Then we need to redirect the (sub-)domain to the correct application in the runn
 
 - Connect to your server through SSH
 - Add a virtualhost to your nginx config
+- use `sudo certbot` to add the certificate to your nginx sites
 
-Here is a sample of the Nginx configuration I use.
+Here is a sample of the final Nginx configuration I use.
 
 ```
 server {
     server_name  pwa.baldir.fr;
-
-    listen 80;
 
     root   /home/marc/sources/mini-vanilla-pwa;
     index  index.html index.htm;
@@ -79,6 +78,26 @@ server {
         root   /usr/share/nginx/html;
     }
 
+
+    listen [::]:443 ssl; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/baldir.fr/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/baldir.fr/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = pwa.baldir.fr) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    server_name  pwa.baldir.fr;
+
+    listen 80;
+    listen [::]:80;
+    return 404; # managed by Certbot
 }
 ```
 ### Add LetEncrypt SSL certificate with certbot
