@@ -2,6 +2,9 @@
 
 POC of the most simple PWA (Progressive Web App) I can do.
 
+- Sources (template) : https://github.com/marc-bouvier/mini-vanilla-pwa
+- Live demo app :  https://marc-bouvier.github.io/mini-vanilla-pwa
+
 ## TODO
 
 - [X] Find out what devices we want to target (https://caniuse.com/)
