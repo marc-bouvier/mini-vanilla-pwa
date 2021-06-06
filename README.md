@@ -163,9 +163,7 @@ server {
 ### `manifest.json`
 
 - create a `manifest.json` file (for more information follow [the w3c spec][w3c-manifest-spec])
-- reference it in a `<link rel="manifest" href="/manifest.json">`
 - create icons (they are required)
-- add support for older devices : `<link rel='icon' sizes='192x192' href='icon-192x192.png'>`
 
 Ex. 
 
