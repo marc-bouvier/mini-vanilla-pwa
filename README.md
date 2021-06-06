@@ -19,6 +19,8 @@ POC of the most simple PWA (Progressive Web App) I can do.
 
 ## Hosting
 
+This sample is hosted as a github page for the sake of the example. You can try with you mobile to install the deployed application here : https://marc-bouvier.github.io/mini-vanilla-pwa/
+
 ## Architecture
 
 - Hosting with https
@@ -30,7 +32,6 @@ Initial setup
 
 1. Setup a git repository
 2. Choose a licence (I chose the https://unlicense.org) - See also https://choosealicense.com/
-3. 
 
 ### First, what is a PWA?
 
@@ -41,22 +42,75 @@ See [MDN PWA definition][mdn-pwa-definition]
 - Classic URL
 - What devices can support PWA?
 
-### Create a (sub-)domain
+### Hosting on a github page
+
+Since this sample is only a static site we can host it on Github Pages and we don't have to have the hassle to buy a domain or install certificate.
+
+Just activate github pages from this repo if you have forked it.
+
+Here is a sample of the [github pages configuration](https://github.com/marc-bouvier/mini-vanilla-pwa/settings/pages) used in my github repository.
+
+![The Github pages configuration screen to configure source and folder for the github pages puvblication of the repository](docs/github-pages-config.png)
+
+- Source
+    - Branch : main
+    - Folder : / (root)
+
+### Hosting on a private server using Linode, Nginx and certbot
+
+If you want to host the application on a real application server such as Nginx, you will need to obtain a domain and secure it with a certificate. 
+
+#### Create a (sub-)domain
 
 First you must own a domain name.
 
 - `pwa.baldir.fr`
 - Create A/AAAA Record for the IP address of your running web server (ex. Apache2, Nginx ... )
+    - Hostname : pwa
+    - Ip Address : the ip of your server
+- Add a CAA record for letsencrypt.org and your domain
+    - Name : pwa
+    - Tag : issue
+    - Value : letsencrypt.org
 
-### Create a virtual host
+#### Create a virtual host
 
 Then we need to redirect the (sub-)domain to the correct application in the running server.
 
+Pre-requisites : install [nginx][nginx-website] & [certbot][certbot-website]
+
 - Connect to your server through SSH
 - Add a virtualhost to your nginx config
+
+```
+server {
+    server_name  pwa.baldir.fr;
+
+    root   /home/marc/sources/mini-vanilla-pwa;
+    index  index.html index.htm;
+
+    listen 80;
+    listen [::]:80;
+    
+    location / {
+       try_files $uri $uri/ =404;
+    }
+
+    error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+}
+```
+
 - use `sudo certbot` to add the certificate to your nginx sites
 
-Here is a sample of the final Nginx configuration I use.
+Here is a sample of the final Nginx configuration modified by certbot.
 
 ```
 server {
@@ -100,14 +154,6 @@ server {
     return 404; # managed by Certbot
 }
 ```
-### Add LetEncrypt SSL certificate with certbot
-
-- Add a CAA record for Linode
-    - Name : pwa
-    - Tag : issue
-    - Value : letsencrypt.org
-    
-TODO : fix later
 
 ### `manifest.json`
 
@@ -115,7 +161,6 @@ TODO : fix later
 - reference it in a `<link rel="manifest" href="/manifest.json">`
 - create icons (they are required)
 - add support for older devices : `<link rel='icon' sizes='192x192' href='icon-192x192.png'>`
-
 
 Ex. 
 
@@ -232,7 +277,7 @@ self.addEventListener('fetch', function(e) {
 ```
 ### Add the application to your mobile phone
 
-Now, you should be able to install the application when you open it (https://spa.baldir.fr) from your device browser.
+Now, you should be able to install the application when you open it (https://marc-bouvier.github.io/mini-vanilla-pwa) from your device browser.
 
 ![The app can now be added to homescreen when opened in the mobile's browser](docs/pwa-add-to-homescreen-01.png)
 
@@ -247,3 +292,5 @@ The application will open in full screen using the browser from which you instal
 
 [w3c-manifest-spec]:https://w3c.github.io/manifest/
 [mdn-pwa-definition]:https://developer.mozilla.org/fr/docs/Web/Progressive_web_apps/App_structure
+[nginx-website]:https://www.nginx.com/
+[certbot-website]:https://certbot.eff.org/
