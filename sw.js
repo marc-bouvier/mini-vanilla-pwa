@@ -3,13 +3,13 @@
 
 var cacheName = 'mini-vanilla-pwa-v1';
 var appShellFiles = [
-    '/',
-    '/index.html',
-    '/app.js',
-    '/style.css',
+    '/mini-vanilla-pwa/',
+    '/mini-vanilla-pwa/index.html',
+    '/mini-vanilla-pwa/app.js',
+    '/mini-vanilla-pwa/style.css',
     // '/favicon.ico',
-    '/icons/icon_144x144.png',
-    '/icons/icon_192x192.png',
+    '/mini-vanilla-pwa/icons/icon_144x144.png',
+    '/mini-vanilla-pwa/icons/icon_192x192.png',
 ];
 var contentToCache =appShellFiles;
 
