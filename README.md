@@ -6,11 +6,12 @@ POC of the most simple PWA (Progressive Web App) I can do.
 
 - [X] Find out what devices we want to target (https://caniuse.com/)
     - Most recent
+- [X] Add subdomain `pwa.baldir.fr`
+- [ ] Create virtual host in my VPS (as a reverse proxy)
+- [ ] Create letsEncrypt certificate for the subdomain `pwa.baldir.fr`
 - [ ] Create and deploy to prove it can be installed on a device
 - [ ] Document how to do it -> Making-of
-- [ ] Add subdomain `pwa.baldir.fr`
-- [ ] Create virtual host in my VPS
-- [ ] Create letsEncrypt certificate for the subdomain `pwa.baldir.fr`
+- [ ] 404 error page `404.html`
 
 ## Installation
 
@@ -35,6 +36,47 @@ Initial setup
 - Native experience (for mobile users also)
 - Classic URL
 - What devices can support PWA?
+
+### Create a (sub-)domain
+
+First you must own a domain name.
+
+- `pwa.baldir.fr`
+- Create A/AAAA Record for the IP address of your running web server (ex. Apache2, Nginx ... )
+
+### Create a virtual host
+
+Then we need to redirect the (sub-)domain to the correct application in the running server.
+
+- Connect to your server through SSH
+- Add a virtualhost to your nginx config
+
+Here is a sample of the configuration I use.
+
+```
+server {
+    server_name  pwa.baldir.fr;
+
+    listen 80;
+
+    root   /home/marc/sources/mini-vanilla-pwa;
+    index  index.html index.htm;
+
+    location / {
+       try_files $uri $uri/ =404;
+    }
+
+    error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+}```
+
 
 ### `manifest.json`
 
