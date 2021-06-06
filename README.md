@@ -8,10 +8,10 @@ POC of the most simple PWA (Progressive Web App) I can do.
     - Most recent
 - [X] Add subdomain `pwa.baldir.fr`
 - [X] Create virtual host in my VPS (as a reverse proxy)
-- [ ] Create letsEncrypt certificate for the subdomain `pwa.baldir.fr`
+- [X] Create letsEncrypt certificate for the subdomain `pwa.baldir.fr`
 - [X] add icons
-- [ ] Check PWA with LightHouse
-- [ ] Create and deploy to prove it can be installed on a device
+- [X] Check PWA with LightHouse
+- [X] Create and deploy to prove it can be installed on a device
 - [ ] Document how to do it -> Making-of
 - [ ] 404 error page `404.html`
 
@@ -230,6 +230,9 @@ self.addEventListener('fetch', function(e) {
     );
 });
 ```
+### Add the application to your mobile phone
+
+Now, you should be able to install the application when you open it (https://spa.baldir.fr) from your device browser.
 
 
 [w3c-manifest-spec]:https://w3c.github.io/manifest/
