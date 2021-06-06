@@ -234,6 +234,16 @@ self.addEventListener('fetch', function(e) {
 
 Now, you should be able to install the application when you open it (https://spa.baldir.fr) from your device browser.
 
+![The app can now be added to homescreen when opened in the mobile's browser](docs/pwa-add-to-homescreen-01.png)
+
+![A prompt to install the application shows up with "Cancel" and "Install" buttons](docs/pwa-add-to-homescreen-02.png)
+
+![A second prompt asks to add the app to the home screen with "Cancel" and "Add automatically" buttons](docs/pwa-add-to-homescreen-03.png)
+
+
+![The icon is present on the phone home screen](docs/pwa-add-to-homescreen-04.png)
+
+The application will open in full screen using the browser from which you installed it.
 
 [w3c-manifest-spec]:https://w3c.github.io/manifest/
 [mdn-pwa-definition]:https://developer.mozilla.org/fr/docs/Web/Progressive_web_apps/App_structure
