@@ -9,6 +9,7 @@ POC of the most simple PWA (Progressive Web App) I can do.
 - [X] Add subdomain `pwa.baldir.fr`
 - [X] Create virtual host in my VPS (as a reverse proxy)
 - [ ] Create letsEncrypt certificate for the subdomain `pwa.baldir.fr`
+- [ ] Check PWA with LightHouse
 - [ ] Create and deploy to prove it can be installed on a device
 - [ ] Document how to do it -> Making-of
 - [ ] 404 error page `404.html`
