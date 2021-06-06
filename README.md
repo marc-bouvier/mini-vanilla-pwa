@@ -5,7 +5,10 @@ POC of the most simple PWA (Progressive Web App) I can do.
 ## TODO
 
 - [ ] Create and deploy to prove it can be installed on a device
-- [ ] Document how to do it
+- [ ] Document how to do it -> Making-of
+- [ ] Add subdomain `pwa.baldir.fr`
+- [ ] Create virtual host in my VPS
+- [ ] Create letsEncrypt certificate for the subdomain `pwa.baldir.fr`
 
 ## Installation
 
@@ -16,7 +19,12 @@ POC of the most simple PWA (Progressive Web App) I can do.
 - Hosting with https
 - Domain
 
-## Making-of
+## Making-of (future blog post)
+
+Initial setup
+
+1. Setup a git repository
+2. 
 
 ### `manifest.json`
 
